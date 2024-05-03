@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Models</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="hamburger-menu" onclick="toggleSidebar()">&#9776;</div>
+        <div class="sidebar left-sidebar" id="left-sidebar">
+            <h2>Prediction Models</h2>
+            <nav>
+                <ul>
+                    <li><a href="#">Disease Classification</a></li>
+                    <li><a href="#">Text Classification</a></li>
+                </ul>
+            </nav>
+            <footer>
+                <a href="#">Publishing Notes</a>
+                <a href="#">Data Protection Policy</a>
+            </footer>
+        </div>
+
+        <div class="content">
+            <!-- Main Content -->
+            <div class="dropdown">
+
+            </div>
+        </div>
+        <div class="sidebar right-sidebar" id="right-sidebar">
+            <!-- Right Sidebar Content -->
+            <h2>Images</h2>
+            <div class="dropdown">
+                <button class="dropbtn disease-btn" onclick="toggleDiseaseMenu()">Disease</button>
+                <button class="dropbtn model-btn" onclick="toggleModelMenu()">Model</button>
+                <div class="dropdown-content" id="disease-menu">
+                    <a href="#" onclick="selectDisease('Disease 1')">Brain Tumor</a>
+                    <a href="#" onclick="selectDisease('Disease 2')">Skin Cancer</a>
+                    <a href="#" onclick="selectDisease('Disease 3')">Disease 3</a>
+                    <a href="#" onclick="selectDisease('Disease 4')">Disease 4</a>
+                </div>
+                <div class="dropdown-content" id="model-menu">
+                    <!-- Models will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="classify-btn">Classify</button>
+
+    <script>
+        // Function to toggle the left sidebar
+        function toggleSidebar() {
+            var sidebar = document.getElementById('left-sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Function to toggle the disease menu
+        function toggleDiseaseMenu() {
+            var diseaseMenu = document.getElementById('disease-menu');
+            diseaseMenu.classList.toggle('show');
+
+            // Get the button position
+            var button = document.querySelector('.disease-btn');
+            var buttonRect = button.getBoundingClientRect();
+
+            // Position the disease menu above the button
+            diseaseMenu.style.bottom = (window.innerHeight - buttonRect.top) + 'px';
+            diseaseMenu.style.left = buttonRect.left + 'px';
+        }
+
+        // Function to select a disease
+        function selectDisease(disease) {
+            // Here you can load models based on the selected disease
+            var modelMenu = document.getElementById('model-menu');
+            modelMenu.innerHTML = ""; // Clear existing models
+
+            // Load models dynamically based on the selected disease
+            switch (disease) {
+                case 'Disease 1':
+                    modelMenu.innerHTML += `<a href="#">Model 1 for Disease 1</a>`;
+                    modelMenu.innerHTML += `<a href="#">Model 2 for Disease 1</a>`;
+                    break;
+                case 'Disease 2':
+                    modelMenu.innerHTML += `<a href="#">Model 1 for Disease 2</a>`;
+                    modelMenu.innerHTML += `<a href="#">Model 2 for Disease 2</a>`;
+                    break;
+                case 'Disease 3':
+                    modelMenu.innerHTML += `<a href="#">Model 1 for Disease 3</a>`;
+                    modelMenu.innerHTML += `<a href="#">Model 2 for Disease 3</a>`;
+                    break;
+                case 'Disease 4':
+                    modelMenu.innerHTML += `<a href="#">Model 1 for Disease 4</a>`;
+                    modelMenu.innerHTML += `<a href="#">Model 2 for Disease 4</a>`;
+                    break;
+            }
+            // Close the disease menu after selecting
+            toggleDiseaseMenu();
+        }
+
+        // Function to toggle the model menu
+        function toggleModelMenu() {
+            var modelMenu = document.getElementById('model-menu');
+            modelMenu.classList.toggle('show');
+
+            // Get the button position
+            var button = document.querySelector('.model-btn');
+            var buttonRect = button.getBoundingClientRect();
+
+            // Position the model menu above the button
+            modelMenu.style.bottom = (window.innerHeight - buttonRect.top) + 'px';
+            modelMenu.style.left = buttonRect.left + 'px';
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
